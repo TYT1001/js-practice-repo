@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html {
+        margin: 0;
+        padding: 0;
+        /* width: 100vw; */
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .dark-mode {
+        background-color: black;
+        color: white;
+      }
+
+      #grandparent {
+        width: 300px;
+        height: 300px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #parent {
+        width: 200px;
+        height: 200px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #child {
+        width: 80px;
+        height: 80px;
+      }
+      .child-black {
+        background-color: black !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flex flex-column justify-center items-center">
+      <div id="grandparent">
+        <div id="parent">
+          <div id="child"></div>
+        </div>
+      </div>
+    </div>
+    <h1 class="back">Click from top to button and Vice ersa</h1>
+    <div
+      class="ph3 ma2 pa2 h-75-l flex justify-center items-center flex-column"
+    >
+      <div class="grow btn" id="button-1" onclick="childToBlack()">
+        <a class="f6 link dim br3 ph3 pv2 mb2 dib white bg-black" href="#0"
+          >Button 1</a
+        >
+      </div>
+      <div class="grow btn" id="button-2" onclick="parentToBlack()">
+        <a class="f6 link dim br3 ph3 pv2 mb2 dib white bg-black" href="#0"
+          >Button 2</a
+        >
+      </div>
+      <div class="grow btn" id="button-3" onclick="grandparentToBlack()">
+        <a class="f6 link dim br3 ph3 pv2 mb2 dib white bg-black" href="#0"
+          >Button 3</a
+        >
+      </div>
+      <div class="grow btn" id="button-4" onclick="myFunction()">
+        <a class="f6 link dim br3 ph3 pv2 mb2 dib white bg-black" href="#0"
+          >Button 4</a
+        >
+      </div>
+    </div>
+    <script>
+      const grandparent = document.querySelector("#grandparent");
+      const parent = document.querySelector("#parent");
+      const child = document.querySelector("#child");
+      const buttonOne = document.querySelector("#button-1");
+      const buttonTwo = document.querySelector("#button-2");
+      const buttonThree = document.querySelector("#button-3");
+      const buttonFour = document.querySelector("#button-4");
+
+      grandparent.addEventListener("click", (e) => {
+        console.log("Grandparent 1 Bubbled");
+      });
+      parent.addEventListener("click", printHi);
+
+      setTimeout(() => {
+        parent.removeEventListener("click", printHi);
+      }, 3000);
+      child.addEventListener("click", (e) => {
+        console.log("child 1 Bubbled");
+      });
+      function printHi() {
+        console.log("hi");
+      }
+      function myFunction() {
+        document.body.classList.toggle("dark-mode");
+      }
+      function childToBlack() {
+        child.classList.toggle("dark-mode");
+      }
+      function parentToBlack() {
+        parent.classList.toggle("dark-mode");
+      }
+      function grandparentToBlack() {
+        grandparent.classList.toggle("dark-mode");
+      }
+      // buttonThree.addEventListener("click", (e) => {
+      //   console.log("hi");
+      //   child.style.background = "red";
+      // });
+    </script>
+  </body>
+</html>
